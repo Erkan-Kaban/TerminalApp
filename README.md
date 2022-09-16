@@ -1,3 +1,27 @@
+### User Interaction and Experience
+<hr>
+
+The game with the menu screen being display.
+
+It includes a "How to play section", "Quit" and most important "Play against dealer"
+
+![](docs/main_screen.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Implementation
 <hr>
 The first day of implementation planning, I was able to come up with the following on Trello:
