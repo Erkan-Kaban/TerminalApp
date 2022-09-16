@@ -2,11 +2,12 @@
 
 echo "Welcome to Blackjack!"
 
-echo "Creating and activating virtual envinronment"
-FILE=/.venv
+echo "Checking for virtual environment"
+FILE=.venv
 if [ -d "$FILE" ]; then
-    echo "virtual environment exists"
+    echo "Virtual environment exists"
 else
+    echo "Creating virtual environment"
     python3 -m venv .venv
     source .venv/bin/activate
 fi
@@ -17,4 +18,4 @@ pip install -r requirements.txt
 
 echo "All python packages are installed, running application"
 
-python3 main.py
+python3 ../main.py

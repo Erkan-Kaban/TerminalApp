@@ -1,3 +1,20 @@
+### Implementation
+<hr>
+The first day of implementation planning, I was able to come up with the following on Trello:
+
+![](docs/Implementation_1.jpg)
+
+Menu creation was on its way, shell scripting, requirement.txt to ensure the game will work from the very beginning of the project and to ensure that every addition that I make, I test on the shell for the changes.
+
+
+
+
+
+
+
+
+
+
 ### Installation Instructions
 <hr>
 
