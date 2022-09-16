@@ -1,9 +1,14 @@
+# Main menu of the game - calls all modules for the main menu.
+from src.modules import ascii_images
 from pick import pick
 from textwrap import wrap
 
 
+# An instance of the Asci class in ascii_images
+menu_title = ascii_images.Asci()
+
 def menu():  # A menu function that takes in a title and options.
-    title = "Please select from the following options"  # Uses the pick module to create this menu.
+    title = f"{menu_title.get_title()} \n Please select from the following options"# Uses the pick module to create this menu.
     options = ["Play against dealer", "How to play", "Quit"]
     option, index = pick(options, title, indicator="\u2660")
 
@@ -20,16 +25,17 @@ def menu():  # A menu function that takes in a title and options.
             menu()
 
 
-# instructions function uses the package textwrap, to wrap the doctype to a width of 145
+# instructions function uses the package textwrap, to wrap the doctype to a width of 150
 def instructions():
-    instructions = """Objective of the game-----> Each participant attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.") 
+    instructions = """Objective of the game-----> Each participant attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
     Card Values/Scoring-----> It is up to each individual player if an ace is worth 1 or 11. Face cards are 10 and any other card is its pip value. 
     Betting------> Before the deal begins, player makes a bet Minimum and maximum limits, limits are 2 credits to 500 credits. Play begins following.
     The Play-----> The player must decide wether to "stand" (not ask for another card) or "hit (ask for another card) and aim a total value of 21.
     Dealers Play -----> The dealer plays when the player has finished there play, the dealer must hit if there total value of their cards are < 17.
     End Objective -----> For the player to win they must attain a higher number than the dealer as close to 21 as possible.
     """
-    wrapped_lines = wrap(instructions, width=145)
+    wrapped_lines = wrap(instructions, width=150)
     return wrapped_lines
-
+# Once we exit out of the instruction function, it returns us back to menu.    
 menu()
+
