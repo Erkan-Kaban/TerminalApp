@@ -14,19 +14,19 @@ class Deck(Cards):
         shuffle(self.deck_of_cards)
     
     # Draw "two" cards from the current deck.
-    def draw_cards(self) -> None:
-        self.hand = self.deck_of_cards[-2:]
-        del self.deck_of_cards[-2:]
+    def draw_cards(self, value):
+        if value == "Deal": # If we select to deal we draw 2 cards.
+            value = -2
+        else: # Else draw a single card
+            value = -1
+        self.hand = self.deck_of_cards[value:]
+        del self.deck_of_cards[value:]
         return self.hand
-        
-       
-        
-    
-
 
 #Testing cards as a fresh deck, using the shuffle and draw cards.
 cards = Deck()
 cards.shuffle()
-hand = cards.draw_cards()
+hand = cards.draw_cards("Deals")
 hand_value = cards.get_values(hand)
 print(hand_value)
+
