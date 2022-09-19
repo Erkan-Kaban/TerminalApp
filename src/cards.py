@@ -14,8 +14,10 @@ class Cards:
         cards = card_combination.split(",")
         # As our for loop created commas at every iteration, we have to pop the last comma value.
         cards.pop()
+        return cards
         
-        # Now we have a list of combinations of cards, we just need to attach a value for each one to dictionary called card_value
+    # This function returns the card value we present to it in a list.
+    def get_values(self, cards):
         card_value = {}
         for card in cards:
             for character in card:
