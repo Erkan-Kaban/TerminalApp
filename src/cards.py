@@ -1,8 +1,6 @@
-import random
-
-class cards:
+class Cards:
      
-    def card_options(self):
+    def card_options(self): 
         # Created a list of possible card values and suits.
         card_combination = ""
         card_list = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -16,8 +14,8 @@ class cards:
         cards = card_combination.split(",")
         # As our for loop created commas at every iteration, we have to pop the last comma value.
         cards.pop()
-        # print(cards)
-        # Now we have a list of combinations of cards, we just need to attach a value for each one.
+        
+        # Now we have a list of combinations of cards, we just need to attach a value for each one to dictionary called card_value
         card_value = {}
         for card in cards:
             for character in card:
@@ -27,11 +25,6 @@ class cards:
                     card_value[card] = 11
                 elif card.startswith("10") or card.startswith(character):
                     card_value[card] = 10
-        print(card_value)
+        return card_value
 
             
-
-
-
-deck = cards()
-print(deck.card_options())
