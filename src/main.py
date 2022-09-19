@@ -3,8 +3,6 @@ from pick import pick
 from textwrap import wrap
 import ascii_images
 
-
-
 # An instance of the Asci class in ascii_images
 menu_title = ascii_images.Asci()
 
