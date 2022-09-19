@@ -24,14 +24,34 @@ It includes a "How to play section", "Quit" and most important "Play against dea
 
 ### Implementation
 <hr>
+
+##### Day 1
+
+<br>
 The first day of implementation planning, I was able to come up with the following on Trello:
+<br><br>
 
 ![](docs/Implementation_1.jpg)
 
 Menu creation was on its way, shell scripting, requirement.txt to ensure the game will work from the very beginning of the project and to ensure that every addition that I make, I test on the shell for the changes.
+<br><br>
 
+<hr>
 
+##### Day 2
 
+<br>
+The second day of implementation planning, I was able to come up with a menu, created a working shell script that reads requirements.txt and checks if the user has created a virtual environment, and the required packages before running the game. Also created some code for the card class that creates a deck of identifiable cards.
+<br><br>
+
+![](docs/implementation_2.jpg.jpg)
+
+<hr>
+
+#### Day 3
+The third day, spent some time creating and completing my deck and card class. As well as adding a PyPI package called 'dealerschoice' and using some of the functions it had to have in game currency. OOP was added to the code and grouped together with methods for everything to be more streamlined, clearer to read and more functional.
+
+![](docs/implementation_3.png)
 
 
 
