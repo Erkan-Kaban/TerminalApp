@@ -1,22 +1,18 @@
 from CardGame.Blackjack.money import Money
 from deck import Deck
 
-
-class Blackjack(Money):
-    def blackjack_table(self) -> None:
-        print('Welcome to BlackJack! \nYou as the player will start with 500 credits \n ')
-        # Cards are shuffled.
-         
-
-    # Player starts at 500 credits.
-    def player(self, credits = 500) -> None:
+class Player(Money):
+    def player(self, buy_in = 500) -> None:
         while(True):
-            player_money = Money() # Instance of a class here from money.py
+            if self.value == 0:
+                rebuy = input("You've run out of credits, please select rebuy amount: $")
+                self.__init__(int(rebuy))
+            # player_money = Money() # Instance of a class here from money.py
             player_hand_total = 0
             # player can make a bet up to and including 500.
             cards.shuffle()
             print('Cards are shuffling')    
-            bet_amount = player_money.bet()
+            bet_amount = self.bet()
             # Draw_cards called under deck.py to deal a card to player
             player_hand = cards.draw_cards('Deal')
             # Contain the players card value in a variable player_hand_value
@@ -41,31 +37,23 @@ class Blackjack(Money):
                     print(player_hand)
                     player_hand_total += self.get_values(player_hand_value)
                     print('Total of: ' + str(player_hand_total) + '\n')
-                    if player_hand_total > 21:
-                        print('Bust! You went over 21! you lose' + '\n')
-
+                if player_hand_total > 21:
+                    print('Bust! You went over 21! you lose' + '\n')
+                    
+                    
+                    print(f'You have: {self.value} remaining')
+            
             if player_hand_total == 21:
-                player_money.blackjack(bet_amount)
-                credits += bet_amount * 2.5
-                print('Your total credits are now: ' + str(credits) + '\n')   
-
-    # This loop function gets the players hand (two cards and adds up the sum value)              
+                self.blackjack(bet_amount)
+                self.value += bet_amount * 2.5
+                print('Your total credits are now: ' + str(self.value) + '\n')
+                
     def get_values(self, values):
         player_hand_total = 0
         for key, value in values.items():
             player_hand_total += values[key]
-        return player_hand_total
+        return player_hand_total 
 
-# Creating an instance of Deck to get handed a new deck.  
 cards = Deck()
-table = Blackjack()
-table.blackjack_table()
-table.player()
-    
-
-
-
-    
-
-
-
+player = Player()
+player.player()

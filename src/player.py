@@ -1,25 +1,32 @@
-# from CardGame.Blackjack.money import Money
-# from deck import Deck
+from CardGame.Blackjack.money import Money
+from deck import Deck
+from player1 import Player
+
+class Blackjack(player):
+    def blackjack_table(self) -> None:
+        print('Welcome to BlackJack! \nYou as the player will start with $500 credits \n ')
+        player.player()
+         
 
 
-# class Player(Money):
-#     player_hand_value = 0
-#     # Player starts at 500 credits.
-#     def __init__(self, credits = 500, first_play = True, isPlayer = True):
-#         self.credits = credits
+    # This loop function gets the players hand (two cards and adds up the sum value)              
+    def get_values(self, values):
+        player_hand_total = 0
+        for key, value in values.items():
+            player_hand_total += values[key]
+        return player_hand_total
+
+# Creating an instance of Deck to get handed a new deck.  
+cards = Deck()
+table = Blackjack()
+table.blackjack_table()
+#table.player()
+player = Player()
     
-#     def player(self,player_hand_value=0):
-#         player_money = Money()
-#         player_hand_total_value = 0
-#         bet_amount = player_money.bet()
-#         player_hand = cards.draw_cards("Deal") #list
-#         player_hand_value = cards.get_values(player_hand) #dictionary
 
-#     def sum_value(self, player):
-#         for key, value in value.items():
-#             player_hand_total += player_hand_value[key]
-        
 
-# cards = Deck()
-# player1 = Player()
-# player1.player()
+
+    
+
+
+

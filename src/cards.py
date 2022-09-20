@@ -4,7 +4,7 @@ class Cards:
         # Created a list of possible card values and suits.
         card_combination = ""
         card_list = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-        suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs' ]
+        suits = ['Spades ♠', 'Hearts ♥', 'Diamonds ♦', 'Clubs ♣' ]
         # Combining suits with card_list.
         for suit in suits:
             for cards in card_list:
