@@ -16,9 +16,9 @@ print("Cards are shuffling")
 player_hand = cards.draw_cards("Deal")
 player_hand_value = cards.get_values(player_hand)
 print("Your hand is: \n")
-# print(player_hand)
-# for card_values in player_hand_value:
-#     player_value += player_hand_value[card_values]
+print(player_hand)
+for card_values in player_hand_value:
+    player_value += player_hand_value[card_values]
 
 print('Total of: ' + str(player_value))
 player_value = 21
