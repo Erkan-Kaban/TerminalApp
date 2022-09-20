@@ -44,7 +44,7 @@ Menu creation was on its way, shell scripting, requirement.txt to ensure the gam
 The second day of implementation planning, I was able to come up with a menu, created a working shell script that reads requirements.txt and checks if the user has created a virtual environment, and the required packages before running the game. Also created some code for the card class that creates a deck of identifiable cards.
 <br><br>
 
-![](docs/implementation_2.jpg.jpg)
+![](docs/implementation_2..jpg)
 
 <hr>
 
@@ -65,7 +65,7 @@ The fourth day, was mainly spent around creating a player class and building on 
 <hr>
 
 1. If you do not have Python installed on your computer or OS, please go to [page](https://www.python.org/downloads/) and install Python.
-2. Please also install pip onto your computer or OS, please go to [link](https://pip.pypa.io/en/stable/installation/)
+2. Please also install pip onto your computer or OS, please go to [link](docs/implementation_2..jpg)
 3. Clone the repository by writing the command line below
 
    `git clone https://github.com/Erkan-Kaban/TerminalApp.git`
