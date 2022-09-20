@@ -53,10 +53,12 @@ The third day, spent some time creating and completing my deck and card class. A
 
 ![](docs/implementation_3.png)
 
+<hr>
 
+### Day 4
+The fourth day, was mainly spent around creating a player class and building on some if statement as well as for loops to check the value of each card. Having a bust feature if the player hits over 21. Adding more features as I go along. I think eventually when I have the logic correct, to try and apply some more OOP.
 
-
-
+![](docs/implementation_4.jpg)
 
 
 ### Installation Instructions
