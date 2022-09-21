@@ -60,6 +60,11 @@ The fourth day, was mainly spent around creating a player class and building on 
 
 ![](docs/implementation_4.jpg)
 
+### Day 5
+The fifth day, made some great progress today, completed the player vs dealer function, the black jack class, options to rebuy, the stand feature. As will as being able to quit more gracefully without errors showing. Also a clear screen at the end of every game. We also ask the player if they would like to play again and if they select no it will exit the game gracefully.
+
+![](docs/implementation_5.jpg)
+
 
 ### Installation Instructions
 <hr>
