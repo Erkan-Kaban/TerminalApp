@@ -1,13 +1,16 @@
 # Main menu of the game - calls all modules for the main menu.
+import os
 from pick import pick
 from textwrap import wrap
 import ascii_images
+from blackjack import blackjack
 
 # An instance of the Asci class in ascii_images
 menu_title = ascii_images.Asci()
 
+
 def menu():  # A menu function that takes in a title and options.
-    title = f"{menu_title.get_title()} \n Please select from the following options"# Uses the pick module to create this menu.
+    title = f"{menu_title.get_title()} \n Please select from the following options"  # Uses the pick module to create this menu.
     options = ["Play against dealer", "How to play", "Quit"]
     option, index = pick(options, title, indicator="\u2660")
 
@@ -15,6 +18,9 @@ def menu():  # A menu function that takes in a title and options.
     # prints instructions from instructions().
     # Gives you the one option to go "Back".
     # Selecting "Back" gives an index of 0.
+    # Selecting an index of 0 will call our blackjack module.
+    if index == 0:
+        blackjack()
     if index == 1:
         title = "\n".join(instructions())
         options = ["Back"]
@@ -35,6 +41,7 @@ def instructions():
     """
     wrapped_lines = wrap(instructions, width=150)
     return wrapped_lines
-# Once we exit out of the instruction function, it returns us back to menu.    
-menu()
 
+
+# Calling the menu function
+menu()
