@@ -7,6 +7,7 @@ from deck import Deck
 from colorama import Fore, init
 init(autoreset=True)
 
+# Blackjack game function
 def blackjack_game():
     # Inheriting Money class from pip packages.
     class Blackjack(Money):
@@ -14,6 +15,7 @@ def blackjack_game():
             print("Welcome to BlackJack! \nYou as the player will start with $500 credits")
             print("To quit press ctrl+c at any time whilst at play or press n at the end of play \n")
 
+        # Player functionality
         def player(self, value=500) -> None:
             # Self.value is inherited by the money.py package and is the players total credits.
             self.value = value
@@ -30,24 +32,25 @@ def blackjack_game():
                         sys.exit(0)
                     # An if statement once we hit 0 to ask the user to rebuy an amount.
                     if self.value == 0:
+                        # We go into game over function and try to get an amount from user.
                         rebuy = player.game_over()
+                        # We reinitialize our value and rebuy credits.
                         self.__init__(int(rebuy))
-                    # Calling function to deal the players hand and to also save it into a variable player_hand_total
+                    # Calling function to get a bet amount from player and saving it to a variable bet_amount.
                     bet_amount = player.bet_amount()
-                    # visual of players hand
+                    # play_hand is a function that saves the players hand visually.
                     player_hand = player.players_hand()
-                    # The value of players hand
+                    # The players total hand value.
                     player_hand_total = player.deal_cards(player_hand, bet_amount)
-                    # prints total hand value
                     
                     # Checking if player has less than 21, while that's True, we will be looping through here.
                     while player_hand_total < 21:
                         players_choice = input("Would you like to hit(another card) or stand(stay) (h/s)? ")
-                        # When player selects h as hit we draw a card and calculate the total value of the cards.
+                        # When player selects h as hit we call player_hit function that get's us the players total hand value after hitting.
                         if players_choice == "h":
                             # Call player_hit function and return the players hand and add up to total.
                             player_hand_total = player.player_hit(player_hand, player_hand_total, bet_amount)
-                              
+                        # When the player selects s as stand we stop player, and let the dealer play. and we calculate our winning/loss and break out of the loop.
                         if players_choice == "s":
                             win_loss = player.player_stand(player_hand_total, bet_amount)
                             self.value = win_loss
@@ -87,7 +90,7 @@ def blackjack_game():
                 print("Your total credits are now: $" + Fore.RED + str(self.value) + "\n")
                 return self.value
             
-        # A function when called player gets dealt a card.
+        # A function when called player gets dealt a single card.
         def player_hit(self, player_hand, player_hand_value, bet_amount):
             player_hand_total = 0
             # Drawing a single card at every hit.
@@ -111,12 +114,13 @@ def blackjack_game():
                 return player_hand_total
                 
 
-        # A Function that returns the players hand.
+        # A Function that returns the players hand visually.
         def players_hand(self):
             # Draw_cards called under deck.py to deal a card to player
             player_hand = cards.draw_cards("Deal")
             return player_hand
 
+        # Returns the bet amount player has made.
         def bet_amount(self):
             cards.shuffle()
             print(Fore.GREEN + "Cards are shuffling")
