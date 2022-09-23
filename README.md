@@ -7,6 +7,24 @@ It includes a "How to play section", "Quit" and most important "Play against dea
 
 ![](docs/main_screen.jpg)
 
+Once the player has selected play against dealer they are met with this screen below:
+
+![](docs/blackjack_1.jpg)
+
+Player is shown what their beginning credits are and have to input a value within their credit limits for the bet.
+
+![](docs/blackjack_2.jpg)
+
+If you are as lucky as me when you're documenting, on the first draw you might get a blackjack a value of 21 from the first two dealt hands! I made it so you automatically win and don't need to play against the dealer.
+
+![](docs/blackjack_3.jpg)
+
+When you select h as you can see the game randomly deals you one of the cards, Aces are set too 11 so in this example we busted as we won't over 21.
+
+![](docs/blackjack_4.jpg)
+
+When you're happy with the value of cards you have, you select s for stand, this automatically puts you up agains the dealer, the dealer deals itself random cards till the value of 17, since 15 is below 17 the dealer dealt one more card and busted in this case by going over 21, making you a winner!
+
 ### R3 Full attribution to referenced sources
 
 <hr>
@@ -44,7 +62,7 @@ PyPI. 2022. colorama. [online] Available at: <https://pypi.org/project/colorama/
 
 The hit feature allows users to draw another single card to add to their hands. When the user types in the "h" letter. The cards are calculated to the player's total hand value. The player's hand is also shown to the user to decide what to do next. The hit feature is active inside a while loop that keeps track of the user's total card hand value. As long as the value of the user's total card hand value doesn't go over 21, the user keeps getting asked if they would like to hit (take another card).
 
-Variable player_hand_total is inside the main while loop to ensure at every new hand we're dealt, the variable is set back to 0. In addition, this variable is in a while loop condition where the player_hand_total < 21. This loop allows the game at play to keep going till the user reaches 21 or over. When the player's card count adds over 21, we place an if statement. If the hand total is over 21. We print the player has lost and a break to break out of the while loop. The user can write whatever they like instead of 'h.' Still, the program constantly loops back to the question, "Would you like to hit(another card) or stand(stay) (h/s)?" no matter if they input numbers or letters, it won't provoke an error. It will simply keep asking them to input (h/s). 
+Variable player_hand_total is inside the main while loop to ensure at every new hand we're dealt, the variable is set to the current card hand total at play. In addition, this variable is in a while loop condition where the player_hand_total < 21. This loop allows the game at play to keep going till the user reaches 21 or over. When the player's card count adds over 21, we place an if statement. If the hand total is over 21. We print the player has lost and a break to break out of the while loop. The user can write whatever they like instead of 'h.' Still, the program constantly loops back to the question, "Would you like to hit(another card) or stand(stay) (h/s)?" no matter if they input numbers or letters, it won't provoke an error. It will simply keep asking them to input (h/s). 
 
 ![](docs/hit_feature.jpg)
 
@@ -124,6 +142,70 @@ The sixth day, tied in my blackjack.py program with the main menu, got it all fu
 
 <hr>
 
+### Day 7
+The seventh day, my main focus was on grouping all of my code in there own individual functions, to make the code cleaner and easier to read. Added more comments in to the code. Gave each variable and class more meaning and a difference. Worked on Readme etc.
+
+![](docs/implementation_7.jpg)
+
+
+<hr>
+<br><Br>
+
+## Testing
+<table>
+    <thead>
+    <tr>
+    <th>Feature</th>
+    <th>Expected Outcome</th>
+    <th>Actual Outcome</th>
+    <th>Any remaining issues?</th>
+    </tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong>Manual Tests</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Main Menu Feature</td>
+<td>Tested out the main menu for any possible ways the user can break the program, they can
+ctrl+d to cause errors. Created a try block to catch a user from doing that and when caught
+to let the user know with a message "Shutdown requested...exiting" before closing down.</td>
+<td>Nil</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td><strong>Stand Feature</strong></td>
+<td>As expected allows the user to only be able to select the stand option only if they enter the key 's' and press enter, the program will not accept any other kind of input unless the user chooses another option which is too hit by pressing the 'h' key, keeps asking the user to enther h or s for this feature. </td>
+<td>As expected</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td><strong>Hit Feature</strong></td>
+<td>The hit feature, just like the stand feature only allows you to enter the letter 'h' on the keyboard and press enter to draw another card, when on this screen the user cannot enter anything else. Just like the stand feature.</td>
+<td>As expected</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td><strong>Bet Feature</strong></td>
+<td>With the bet feature I limited the amounts to what the user currently has as credits, they start off at 500 so as example they cannot bet more than what they currently have. They cannot enter a negative integer. Or a float number, it needs to be a whole number as credits. Will not allow any other characters other than the numbers between what the user has as credits and $1 not including 0 also. </td>
+<td>As expected</td>
+<td>Nil</td>
+</tr>
+<tr>
+<td><strong>Rebuy Feature</strong></td>
+<td>With the rebuy feature, it is as expected, only comes up when the user has run out of funds, and specificies to the user that they can only input a maximum of 1000, does not allow the user to enter any negative integers, floats or characters, only whole numbers between 1 and 1000 as credits. Works as expected, catches anything else the user may enter and replies back for the user to enter something valid. </td>
+<td>As expected</td>
+<td>Nil</td>
+</tr>
+<tr>
+
+
+</tbody>
+</table>
+<br>
 ### Installation Instructions
 <hr>
 
@@ -139,4 +221,4 @@ The sixth day, tied in my blackjack.py program with the main menu, got it all fu
 5. From here we can run blackjack by executing the shell script by entering the command 
 
     `./blackjack.sh`
-6. From here we check if you've installed the dependecies required and will run the game with prompts.
+6. From here the script will automatically check for you, if you have installed the necessary dependencies, it will then check if you've created a virtual environment for the game also, once all these needs have been met the main menu will run. The second time around you run the game it won't take as long as you've already made your required virtual environment.

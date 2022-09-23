@@ -3,11 +3,18 @@
 import sys, traceback
 import clearing
 from multiprocessing.sharedctypes import Value
+
+# External package called CardGame
 from CardGame.Blackjack.money import Money
+
+# Importing our deck_of_cards class from our deck.py
 from deck import Deck_of_cards
 from colorama import Fore, init
+
 init(autoreset=True)
 
+# Our Blackjack class that contains all the functions we need to play black jack.
+# Also inherits the Money class from our external package.
 class Blackjack(Money):
     def blackjack_table(self) -> None:
         print("Welcome to BlackJack! \nYou as the player will start with $500 credits")
@@ -40,14 +47,15 @@ class Blackjack(Money):
                 player_hand = self.players_hand()
                 # The players total hand value.
                 player_hand_total = self.deal_cards(player_hand, bet_amount)
-                
+
                 # Checking if player has less than 21, while that's True, we will be looping through here.
                 while player_hand_total < 21:
                     players_choice = input("Would you like to hit(another card) or stand(stay) (h/s)? ")
                     # When player selects h as hit we call player_hit function that get's us the players total hand value after hitting.
                     if players_choice == "h":
                         # Call player_hit function and return the players hand and add up to total.
-                        player_hand_total = self.player_hit(player_hand, player_hand_total, bet_amount)
+                        player_hand_total = self.player_hit(
+                            player_hand, player_hand_total, bet_amount)
                     # When the player selects s as stand we stop player, and let the dealer play. and we calculate our winning/loss and break out of the loop.
                     if players_choice == "s":
                         win_loss = self.player_stand(player_hand_total, bet_amount)
@@ -56,11 +64,13 @@ class Blackjack(Money):
 
                 # When the game is over we ask the user if they would like to quit or play again and place it in a variable.
                 game_over = self.play_again()
+        # Catches any interruptions made by the keyboard.
         except KeyboardInterrupt:
             print("/n")
             print("Shutdown requested...exiting")
         except Exception:
             traceback.print_exc(file=sys.stdout)
+        # If user wants to exit, the program can exit out.
         sys.exit(0)
 
     # Dealer function activates, plays cards till they hit above 17.
@@ -70,12 +80,14 @@ class Blackjack(Money):
         if player_hand_total > dealer_hand_total:
             print(Fore.YELLOW + "You Win!!")
             self.value += bet_amount * 2
-            print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+            print(
+                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
             return self.value
         elif dealer_hand_total > 21:
             print(Fore.YELLOW + "Dealer busts!! You Win!!")
             self.value += bet_amount * 2
-            print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+            print(
+                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
             return self.value
         elif player_hand_total == dealer_hand_total:
             print(Fore.RED + "Push!! - Draw!! Bet is refunded")
@@ -86,16 +98,19 @@ class Blackjack(Money):
             print(Fore.RED + "Dealer wins!")
             print("Your total credits are now: $" + Fore.RED + str(self.value) + "\n")
             return self.value
-        
+
     # A function when called player gets dealt a single card.
     def player_hit(self, player_hand, player_hand_value, bet_amount):
         player_hand_total = 0
         # Drawing a single card at every hit.
         player_hand += cards.draw_cards("Draw")
+        # Getting the total numeric value of our cards.
         player_hand_value = cards.get_values(player_hand)
         print(Fore.CYAN + str(player_hand))
+        # Get the total numeric value of our cards.
         player_hand_total = self.get_values(player_hand_value)
         print("Total of: " + str(player_hand_total) + "\n")
+        # Checking if statements on what the player hand total is.
         if player_hand_total < 21:
             return player_hand_total
         if player_hand_total == 21:
@@ -109,7 +124,6 @@ class Blackjack(Money):
             # Prints the remaining value for player.
             print(f"You have: ${self.value} remaining")
             return player_hand_total
-            
 
     # A Function that returns the players hand visually.
     def players_hand(self):
@@ -127,7 +141,7 @@ class Blackjack(Money):
 
     # A function that deals the player two cards.
     def deal_cards(self, player_hand, bet_amount):
-            # Need a variable to keep count of the players hand value total.
+        # Need a variable to keep count of the players hand value total.
         player_hand_total = 0
         player_hand_value = cards.get_values(player_hand)
         print("\n Your hand is: \n")
@@ -151,6 +165,7 @@ class Blackjack(Money):
     # A function that asks the player to play again.
     def play_again(self):
         while True:
+            # Receive game over input from the user, if they'd like to continue or not is a Boolean feature.
             game_over = input("Would you like to play another hand? type n to quit (y/n) ")
             if game_over == "y":
                 game_over = False
@@ -167,8 +182,7 @@ class Blackjack(Money):
         # A loop to try users entered amount, max is 1000 and doesn't allow for any negative numbers, or other characters.
         while True:
             try:
-                rebuy = input(
-                "You've run out of credits, please select rebuy amount (max $1000): $")
+                rebuy = input("You've run out of credits, please select rebuy amount (max $1000): $")
                 while int(rebuy) > 1000 or int(rebuy) <= 0:
                     rebuy = input("Please enter less or equal to 1000 rebuy amount: $")
                     # Using the money package to rebuy with the amount inputted above.
@@ -197,14 +211,6 @@ class Blackjack(Money):
             player_hand_total += values[key]
         return player_hand_total
 
+
+# Supplies a deck of cards
 cards = Deck_of_cards()
-
-if __name__ == '__main__':
-    # Creating instances of the classes to generate a dealer, player, a deck of cards, and the blackjack game.
-    table = Blackjack()
-    table.blackjack_table()
-    player = Blackjack()
-    player.player()
-    dealer = Blackjack()
-    dealer.dealer()
-

@@ -3,13 +3,15 @@ import sys, traceback
 from pick import pick
 from textwrap import wrap
 import ascii_images
+
 # from blackjack import blackjack
 from blackjack_main import blackjack_game
 
 # An instance of the Asci class in ascii_images
 menu_title = ascii_images.Asci()
-
+# Menu title with a try block
 try:
+
     def menu():  # A menu function that takes in a title and options.
         title = f"{menu_title.get_title()} \n Please select from the following options"  # Uses the pick module to create this menu.
         options = ["Play against dealer", "How to play", "Quit"]
@@ -19,7 +21,7 @@ try:
         # prints instructions from instructions().
         # Gives you the one option to go "Back".
         # Selecting "Back" gives an index of 0.
-        # Selecting an index of 0 will call our blackjack module.
+        # Selecting an index of 0 will call our blackjack game.
         if index == 0:
             blackjack_game()
         if index == 1:
@@ -30,8 +32,7 @@ try:
             if index == ("Back", 0):
                 menu()
 
-
-    # instructions function uses the package textwrap, to wrap the doctype to a width of 150
+    # instructions function uses the package textwrap, to wrap the doctype to a width of 150.
     def instructions():
         instructions = """Objective of the game-----> Each participant attempts to beat the dealer by getting a count as close to 21 as possible, without going over 21.
         Card Values/Scoring-----> It is up to each individual player if an ace is worth 1 or 11. Face cards are 10 and any other card is its pip value. 
@@ -43,12 +44,12 @@ try:
         wrapped_lines = wrap(instructions, width=150)
         return wrapped_lines
 
-
-    # Calling the menu function
+    # Calling the menu function.
     menu()
+# Catches any keyboard interruptions.
 except KeyboardInterrupt:
-        print("/n")
-        print("Shutdown requested...exiting")
+    print("/n")
+    print("Shutdown requested...exiting")
 except Exception:
-        traceback.print_exc(file=sys.stdout)
-        sys.exit(0)
+    traceback.print_exc(file=sys.stdout)
+    sys.exit(0)

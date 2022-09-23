@@ -8,23 +8,3 @@ def blackjack_game():
     table.blackjack_table()
     player.player()
     dealer.dealer()
-
-if __name__ == '__main__':
-    # Creating instances of the classes to generate a dealer, player, a deck of cards, and the blackjack game.
-    blackjack_game()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
