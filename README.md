@@ -12,7 +12,7 @@
 * [Features](https://github.com/Erkan-Kaban/TerminalApp#r6-features)
 * [Implementation](https://github.com/Erkan-Kaban/TerminalApp#implementation)
 * [Testing](https://github.com/Erkan-Kaban/TerminalApp#testing)
-* [Installation Instructions]()
+* [Installation Instructions](https://github.com/Erkan-Kaban/TerminalApp#installation-instructions)
 
 
 
