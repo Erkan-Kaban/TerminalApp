@@ -1,3 +1,22 @@
+# Welcome Blackjack 
+## Created in Python :snake:
+
+## Table of contents
+<hr>
+
+* [User Interaction and Experience](https://github.com/Erkan-Kaban/TerminalApp#user-interaction-and-experience)
+* [Full Attribution to referenced sources](https://github.com/Erkan-Kaban/TerminalApp#r3-full-attribution-to-referenced-sources)
+* [Source control repository](https://github.com/Erkan-Kaban/TerminalApp#r4-link-to-source-control-repository)
+* [The style guide or styling convention adhered to](https://github.com/Erkan-Kaban/TerminalApp#r5-the-style-guide-or-styling-convention-adhered-to)
+* [The style guide or styling convention adhered to](https://github.com/Erkan-Kaban/TerminalApp#r5-the-style-guide-or-styling-convention-adhered-to)
+* [Features](https://github.com/Erkan-Kaban/TerminalApp#r6-features)
+* [Implementation](https://github.com/Erkan-Kaban/TerminalApp#implementation)
+* [Testing](https://github.com/Erkan-Kaban/TerminalApp#testing)
+* [Installation Instructions]()
+
+
+
+
 ### User Interaction and Experience
 <hr>
 
@@ -206,6 +225,7 @@ to let the user know with a message "Shutdown requested...exiting" before closin
 </tbody>
 </table>
 <br>
+
 ### Installation Instructions
 <hr>
 
