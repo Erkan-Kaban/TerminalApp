@@ -1,9 +1,9 @@
-from cards import Cards
+from cards import Card_Generator
 from random import shuffle
 
 
 # Class inherits from the cards module.
-class Deck(Cards):
+class Deck_of_cards(Card_Generator):
     # Initialize with a deck of cards from the card_option() function.
     def __init__(self) -> None:
         self.deck_of_cards = self.card_options()

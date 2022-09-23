@@ -4,7 +4,7 @@ from pick import pick
 from textwrap import wrap
 import ascii_images
 # from blackjack import blackjack
-from blackjack import blackjack_game
+from blackjack_main import blackjack_game
 
 # An instance of the Asci class in ascii_images
 menu_title = ascii_images.Asci()

@@ -1,4 +1,4 @@
-class Cards:
+class Card_Generator:
     def card_options(self):
         # Created a list of possible card values and suits.
         card_combination = ""

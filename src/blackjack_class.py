@@ -4,7 +4,7 @@ import sys, traceback
 import clearing
 from multiprocessing.sharedctypes import Value
 from CardGame.Blackjack.money import Money
-from deck import Deck
+from deck import Deck_of_cards
 from colorama import Fore, init
 init(autoreset=True)
 
@@ -55,7 +55,7 @@ class Blackjack(Money):
                         break
 
                 # When the game is over we ask the user if they would like to quit or play again and place it in a variable.
-                game_over = player.play_again()
+                game_over = self.play_again()
         except KeyboardInterrupt:
             print("/n")
             print("Shutdown requested...exiting")
@@ -84,7 +84,6 @@ class Blackjack(Money):
             return self.value
         else:
             print(Fore.RED + "Dealer wins!")
-            self.value -= bet_amount
             print("Your total credits are now: $" + Fore.RED + str(self.value) + "\n")
             return self.value
         
@@ -198,11 +197,12 @@ class Blackjack(Money):
             player_hand_total += values[key]
         return player_hand_total
 
+cards = Deck_of_cards()
+
 if __name__ == '__main__':
     # Creating instances of the classes to generate a dealer, player, a deck of cards, and the blackjack game.
     table = Blackjack()
     table.blackjack_table()
-    cards = Deck()
     player = Blackjack()
     player.player()
     dealer = Blackjack()
