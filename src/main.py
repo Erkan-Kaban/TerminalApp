@@ -4,7 +4,7 @@ from pick import pick
 from textwrap import wrap
 import ascii_images
 # from blackjack import blackjack
-from blackjack_backup import blackjack
+from blackjack import blackjack_game
 
 # An instance of the Asci class in ascii_images
 menu_title = ascii_images.Asci()
@@ -21,7 +21,7 @@ try:
         # Selecting "Back" gives an index of 0.
         # Selecting an index of 0 will call our blackjack module.
         if index == 0:
-            blackjack()
+            blackjack_game()
         if index == 1:
             title = "\n".join(instructions())
             options = ["Back"]

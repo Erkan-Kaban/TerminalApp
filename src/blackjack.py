@@ -7,7 +7,7 @@ from deck import Deck
 from colorama import Fore, init
 init(autoreset=True)
 
-def blackjack():
+def blackjack_game():
     # Inheriting Money class from pip packages.
     class Blackjack(Money):
         def blackjack_table(self) -> None:
@@ -30,101 +30,31 @@ def blackjack():
                         sys.exit(0)
                     # An if statement once we hit 0 to ask the user to rebuy an amount.
                     if self.value == 0:
-                        # A loop to try users entered amount, max is 1000 and doesn't allow for any negative numbers, or other characters.
-                        while True:
-                            try:
-                                rebuy = input(
-                                    "You've run out of credits, please select rebuy amount (max $1000): $")
-                                while int(rebuy) > 1000:
-                                    rebuy = input("Please enter less or equal to 1000 rebuy amount: $")
-                                # Using the money package to rebuy with the amount inputted above.
-                                self.__init__(int(rebuy)) 
-                                break
-                            # If there is a value error such as 0 we ask the user to enter a valid option below.
-                            except ValueError:
-                                print("Please enter a valid amount, $1 > $1000")
-
-                    # Need a variable to keep count of the players hand value total.
-                    player_hand_total = 0
-                    # The shuffle module is called from my cards module.
-                    cards.shuffle()
-                    print(Fore.GREEN + "Cards are shuffling")
-                    # Player can make a bet up to and including their credit amount.
-                    print(Fore.CYAN + f"Your current credits are: ${self.value}")
-                    bet_amount = self.bet()
-                    # Draw_cards called under deck.py to deal a card to player
-                    player_hand = cards.draw_cards("Deal")
-                    # Contain the players card value in a variable player_hand_value
-                    player_hand_value = cards.get_values(player_hand)
-                    print("\n Your hand is: \n")
-                    # Prints players hand
-                    print(Fore.CYAN + str(player_hand) + "\n")
-                    player_hand_total += self.get_values(player_hand_value)
-                    # Prints the total in a string
-                    print("Total of: " + str(player_hand_total) + "\n")
-
+                        rebuy = player.game_over()
+                        self.__init__(int(rebuy))
+                    # Calling function to deal the players hand and to also save it into a variable player_hand_total
+                    bet_amount = player.bet_amount()
+                    # visual of players hand
+                    player_hand = player.players_hand()
+                    # The value of players hand
+                    player_hand_total = player.deal_cards(player_hand, bet_amount)
+                    # prints total hand value
+                    
                     # Checking if player has less than 21, while that's True, we will be looping through here.
                     while player_hand_total < 21:
                         players_choice = input("Would you like to hit(another card) or stand(stay) (h/s)? ")
                         # When player selects h as hit we draw a card and calculate the total value of the cards.
                         if players_choice == "h":
-                            player_hand_total = 0
-                            player_hand += cards.draw_cards("Draw")
-                            player_hand_value = cards.get_values(player_hand)
-                            print(Fore.CYAN + str(player_hand))
-                            player_hand_total += self.get_values(player_hand_value)
-                            print("Total of: " + str(player_hand_total) + "\n")
-                        # An if statement that checks if the user has gone over 21.
-                        if player_hand_total > 21:
-                            print(Fore.RED + "Bust! You went over 21! you lose" + "\n")
-                            # Prints the remaining value for player.
-                            print(f"You have: ${self.value} remaining")
-                            break
-
-                        # Once the player is happy with there hand and haven't gone over 21, they select s for stand.
-                        # This is when the dealer plays his/her hand out.
+                            # Call player_hit function and return the players hand and add up to total.
+                            player_hand_total = player.player_hit(player_hand, player_hand_total, bet_amount)
+                              
                         if players_choice == "s":
-                            # Dealer function activates, plays cards till they hit above 17.
-                            dealer_hand_total = self.dealer()
-                            # After the dealer has dealt cards to itself, we check the variance between player and dealer, calculate who won or lost, and winnings or loss.
-                            if player_hand_total > dealer_hand_total:
-                                print(Fore.YELLOW + "You Win!!")
-                                self.value += bet_amount * 2
-                                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
-                                break
-                            elif dealer_hand_total > 21:
-                                print(Fore.YELLOW + "Dealer busts!! You Win!!")
-                                self.value += bet_amount * 2
-                                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
-                                break
-                            elif player_hand_total == dealer_hand_total:
-                                print(Fore.RED + "Push!! - Draw bet is refunded")
-                                self.value += bet_amount
-                                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
-                                break
-                            else:
-                                print(Fore.RED + "Dealer wins!")
-                                break
-                    # Checks for blackjack
-                    if player_hand_total == 21:
-                        # Using the money.py function named blackjack.
-                        self.blackjack(bet_amount)
-                        print(Fore.YELLOW + "Thats Blackjack!!")
-                        print("Your total credits are now: $ " + str(self.value) + "\n")
+                            win_loss = player.player_stand(player_hand_total, bet_amount)
+                            self.value = win_loss
+                            break
 
-                    # When the cards are dealt and game is over we ask the user if they would like to quit or play again.
-                    while True:
-                        game_over = input("Would you like to play another hand? type n to quit (y/n) ")
-                        if game_over == "y":
-                            game_over = False
-                            clearing.clear()
-                            break
-                        elif game_over == "n":
-                            game_over = True
-                            break
-                        else:
-                            print("Please type in y or n")
-            # We catch any hotkeys that try and quit the game.
+                    # When the game is over we ask the user if they would like to quit or play again and place it in a variable.
+                    game_over = player.play_again()
             except KeyboardInterrupt:
                 print("/n")
                 print("Shutdown requested...exiting")
@@ -132,6 +62,120 @@ def blackjack():
                 traceback.print_exc(file=sys.stdout)
             sys.exit(0)
 
+        # Dealer function activates, plays cards till they hit above 17.
+        def player_stand(self, player_hand_total, bet_amount):
+            dealer_hand_total = self.dealer()
+            # After the dealer has dealt cards to itself, we check the variance between player and dealer, calculate who won or lost, and winnings or loss.
+            if player_hand_total > dealer_hand_total:
+                print(Fore.YELLOW + "You Win!!")
+                self.value += bet_amount * 2
+                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+                return self.value
+            elif dealer_hand_total > 21:
+                print(Fore.YELLOW + "Dealer busts!! You Win!!")
+                self.value += bet_amount * 2
+                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+                return self.value
+            elif player_hand_total == dealer_hand_total:
+                print(Fore.RED + "Push!! - Draw!! Bet is refunded")
+                self.value += bet_amount
+                print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+                return self.value
+            else:
+                print(Fore.RED + "Dealer wins!")
+                self.value -= bet_amount
+                print("Your total credits are now: $" + Fore.RED + str(self.value) + "\n")
+                return self.value
+            
+        # A function when called player gets dealt a card.
+        def player_hit(self, player_hand, player_hand_value, bet_amount):
+            player_hand_total = 0
+            # Drawing a single card at every hit.
+            player_hand += cards.draw_cards("Draw")
+            player_hand_value = cards.get_values(player_hand)
+            print(Fore.CYAN + str(player_hand))
+            player_hand_total = self.get_values(player_hand_value)
+            print("Total of: " + str(player_hand_total) + "\n")
+            if player_hand_total < 21:
+                return player_hand_total
+            if player_hand_total == 21:
+                # Using the money.py function named blackjack.
+                self.blackjack(bet_amount)
+                print(Fore.YELLOW + "Thats Blackjack!!")
+                print("Your total credits are now: $ " + str(self.value) + "\n")
+                return player_hand_total
+            if player_hand_total > 21:
+                print(Fore.RED + "Bust! You went over 21! you lose" + "\n")
+                # Prints the remaining value for player.
+                print(f"You have: ${self.value} remaining")
+                return player_hand_total
+                
+
+        # A Function that returns the players hand.
+        def players_hand(self):
+            # Draw_cards called under deck.py to deal a card to player
+            player_hand = cards.draw_cards("Deal")
+            return player_hand
+
+        def bet_amount(self):
+            cards.shuffle()
+            print(Fore.GREEN + "Cards are shuffling")
+            print(Fore.CYAN + f"Your current credits are: ${self.value}")
+            bet_amount = self.bet()
+            return bet_amount
+
+        # A function that deals the player two cards.
+        def deal_cards(self, player_hand, bet_amount):
+             # Need a variable to keep count of the players hand value total.
+            player_hand_total = 0
+            player_hand_value = cards.get_values(player_hand)
+            print("\n Your hand is: \n")
+            # Prints players hand
+            print(Fore.CYAN + str(player_hand) + "\n")
+            player_hand_total += self.get_values(player_hand_value)
+            # Prints the total in a string
+            print("Total of: " + str(player_hand_total) + "\n")
+            if player_hand_total == 21:
+                self.blackjack(bet_amount)
+                print(Fore.YELLOW + "Thats Blackjack!!")
+                print("Your total credits are now: $ " + str(self.value) + "\n")
+                return player_hand_total
+            if player_hand_total > 21:
+                print(Fore.RED + "Bust! You went over 21! you lose" + "\n")
+                # Prints the remaining value for player.
+                print(f"You have: ${self.value} remaining")
+                return player_hand_total
+            return player_hand_total
+
+        # A function that asks the player to play again.
+        def play_again(self):
+            while True:
+                game_over = input("Would you like to play another hand? type n to quit (y/n) ")
+                if game_over == "y":
+                    game_over = False
+                    clearing.clear()
+                    return game_over
+                elif game_over == "n":
+                    game_over = True
+                    clearing.clear()
+                    return game_over
+                else:
+                    print("Please type in y or n")
+
+        def game_over(self):
+            # A loop to try users entered amount, max is 1000 and doesn't allow for any negative numbers, or other characters.
+            while True:
+                try:
+                    rebuy = input(
+                    "You've run out of credits, please select rebuy amount (max $1000): $")
+                    while int(rebuy) > 1000 or int(rebuy) <= 0:
+                        rebuy = input("Please enter less or equal to 1000 rebuy amount: $")
+                        # Using the money package to rebuy with the amount inputted above.
+                    return rebuy
+                # If there is a value error such as 0 we ask the user to enter a valid option below.
+                except ValueError:
+                    print("Please enter a valid amount, $1 > $1000")
+  
         # A dealer function, this function is called once the player chooses to stand.
         def dealer(self):
             dealer_hand_total = 0
