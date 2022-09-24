@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Welcome to Blackjack!"
+echo "Welcome to Blackjack! Installing...."
 
 echo "Checking for virtual environment"
 FILE=.venv

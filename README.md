@@ -13,6 +13,7 @@
 * [Implementation](https://github.com/Erkan-Kaban/TerminalApp#implementation)
 * [Testing](https://github.com/Erkan-Kaban/TerminalApp#testing)
 * [Installation Instructions](https://github.com/Erkan-Kaban/TerminalApp#installation-instructions)
+* [Trello Board](https://trello.com/b/ZVjLvbqW/implementation-plan)
 
 
 
@@ -236,9 +237,9 @@ to let the user know with a message "Shutdown requested...exiting" before closin
    `git clone https://github.com/Erkan-Kaban/TerminalApp.git`
 
 4. From here we need to change into the directory src folder from the cloned repository on our local system by:
-   
-    `cd src`
+    `cd TerminalApp/`
+    `cd src/`
 5. From here we can run blackjack by executing the shell script by entering the command 
 
     `./blackjack.sh`
-6. From here the script will automatically check for you, if you have installed the necessary dependencies, it will then check if you've created a virtual environment for the game also, once all these needs have been met the main menu will run. The second time around you run the game it won't take as long as you've already made your required virtual environment.
+6. From here the script will automatically check for you if you have a virtual environment, if not it'll create one for you then will check if you have the necessary dependencies installed, once all these needs have been met the main menu will run. The second time around you run the game it won't take as long as you've already made your required virtual environment. Enjoy playing and testing blackjack!
