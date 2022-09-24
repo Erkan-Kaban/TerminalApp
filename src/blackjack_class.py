@@ -1,26 +1,31 @@
-# Blackjack game function
-# Importing pip package CardGame, importing my own deck module.
-import sys, traceback
+"""Importing sys for exit functionality
+Importing clearing to clear the screen with clearing.clear()
+Importing Money from an external package named CardGame
+Importing our deck with class Deck_of_cards
+Importing colorama to give our game some colour.
+"""
+
+import sys
 import clearing
-from multiprocessing.sharedctypes import Value
-
-# External package called CardGame
 from CardGame.Blackjack.money import Money
-
-# Importing our deck_of_cards class from our deck.py
 from deck import Deck_of_cards
 from colorama import Fore, init
 
+
+"""init feature of colorama when a color is set resets the color module so we
+dont get a continuation of the color throughout the entire game, rather we
+get it explicitly where we've stated it.
+"""
 init(autoreset=True)
 
-# Our Blackjack class that contains all the functions we need to play black jack.
-# Also inherits the Money class from our external package.
+
 class Blackjack(Money):
     def blackjack_table(self) -> None:
         print("Welcome to BlackJack! \nYou as the player will start with $500 credits")
-        print("To quit press ctrl+c at any time whilst at play or press n at the end of play \n")
+        print(
+            "To quit press ctrl+c at any time whilst at play or press n at the end of play \n"
+        )
 
-    # Player functionality
     def player(self, value=500) -> None:
         # Self.value is inherited by the money.py package and is the players total credits.
         self.value = value
@@ -50,12 +55,15 @@ class Blackjack(Money):
 
                 # Checking if player has less than 21, while that's True, we will be looping through here.
                 while player_hand_total < 21:
-                    players_choice = input("Would you like to hit(another card) or stand(stay) (h/s)? ")
+                    players_choice = input(
+                        "Would you like to hit(another card) or stand(stay) (h/s)? "
+                    )
                     # When player selects h as hit we call player_hit function that get's us the players total hand value after hitting.
                     if players_choice == "h":
                         # Call player_hit function and return the players hand and add up to total.
                         player_hand_total = self.player_hit(
-                            player_hand, player_hand_total, bet_amount)
+                            player_hand, player_hand_total, bet_amount
+                        )
                     # When the player selects s as stand we stop player, and let the dealer play. and we calculate our winning/loss and break out of the loop.
                     if players_choice == "s":
                         win_loss = self.player_stand(player_hand_total, bet_amount)
@@ -81,18 +89,22 @@ class Blackjack(Money):
             print(Fore.YELLOW + "You Win!!")
             self.value += bet_amount * 2
             print(
-                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n"
+            )
             return self.value
         elif dealer_hand_total > 21:
             print(Fore.YELLOW + "Dealer busts!! You Win!!")
             self.value += bet_amount * 2
             print(
-                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n"
+            )
             return self.value
         elif player_hand_total == dealer_hand_total:
             print(Fore.RED + "Push!! - Draw!! Bet is refunded")
             self.value += bet_amount
-            print("Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n")
+            print(
+                "Your total credits are now: $" + Fore.YELLOW + str(self.value) + "\n"
+            )
             return self.value
         else:
             print(Fore.RED + "Dealer wins!")
@@ -166,7 +178,9 @@ class Blackjack(Money):
     def play_again(self):
         while True:
             # Receive game over input from the user, if they'd like to continue or not is a Boolean feature.
-            game_over = input("Would you like to play another hand? type n to quit (y/n) ")
+            game_over = input(
+                "Would you like to play another hand? type n to quit (y/n) "
+            )
             if game_over == "y":
                 game_over = False
                 clearing.clear()
@@ -182,7 +196,9 @@ class Blackjack(Money):
         # A loop to try users entered amount, max is 1000 and doesn't allow for any negative numbers, or other characters.
         while True:
             try:
-                rebuy = input("You've run out of credits, please select rebuy amount (max $1000): $")
+                rebuy = input(
+                    "You've run out of credits, please select rebuy amount (max $1000): $"
+                )
                 while int(rebuy) > 1000 or int(rebuy) <= 0:
                     rebuy = input("Please enter less or equal to 1000 rebuy amount: $")
                     # Using the money package to rebuy with the amount inputted above.
